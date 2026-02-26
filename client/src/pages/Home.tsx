@@ -20,7 +20,7 @@ import { api } from "@shared/routes";
 // Import local assets as requested
 import tempSettingsImg from "@assets/516XEadYT4L._AC_UF1000,1000_QL80__1772140489818.jpg";
 import transformationImg from "@assets/26623241335c620c1de_1772140489819.webp";
-import productWhiteBgImg from "@assets/Escova_(Fundo_branco)_1772140489825.jpg";
+import productWhiteBgImg from "@assets/Escova_(Fundo_branco)_(1)_1772144130062.png";
 
 // Extend schema for form validation with better PT-BR messages
 const formSchema = api.orders.create.input.extend({
