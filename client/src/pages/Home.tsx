@@ -83,37 +83,39 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Floating Sticky Trust Badge */}
-      <div className="fixed top-0 w-full z-50 bg-primary text-primary-foreground py-2 text-center text-sm font-medium tracking-wide shadow-md flex items-center justify-center gap-2">
-        <Truck className="w-4 h-4" />
-        <span>PAGAMENTO SOMENTE NA ENTREGA • RISCO ZERO</span>
+      <div className="fixed top-0 w-full z-50 bg-[#064e3b] text-white py-2.5 text-center text-xs md:text-sm font-bold tracking-wider shadow-lg flex items-center justify-center gap-3 px-4">
+        <Truck className="w-4 h-4 text-secondary" />
+        <span className="uppercase">🚚 Pagamento Somente na Entrega • Frete Grátis Hoje</span>
       </div>
 
       {/* HERO SECTION */}
-      <section className="pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <section className="pt-28 pb-16 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <motion.div 
-          className="flex-1 text-center md:text-left space-y-6"
+          className="flex-1 text-center md:text-left space-y-8"
           initial="hidden" animate="visible" variants={staggerContainer}
         >
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/30 text-primary font-semibold text-sm mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span>Resultado de salão em casa</span>
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/40 text-primary border border-primary/10 font-bold text-xs uppercase tracking-widest mb-2">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Tecnologia de Salão Americana</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-tight text-balance">
-            Diga Adeus ao Frizz e às Horas Perdidas no Salão.
+          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] text-balance tracking-tight">
+            Cabelo de Salão em <span className="text-[#064e3b]">15 Minutos</span>, Sem Sair de Casa.
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-lg md:text-xl text-muted-foreground max-w-2xl text-balance">
-            A <strong className="text-primary font-display">Lumi Liss</strong> seca, alisa e modela em apenas 15 minutos. 
-            Sem danificar os fios e com total segurança.
+          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-muted-foreground max-w-2xl text-balance leading-relaxed">
+            A única com <strong>25 placas de cerâmica</strong> que alisam desde a raiz sem queimar. Brilho espelhado e zero frizz com segurança total.
           </motion.p>
           
-          <motion.div variants={fadeInUp} className="pt-4 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-            <button onClick={scrollToForm} className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-lg bg-primary text-primary-foreground shadow-xl shadow-primary/20 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 group">
-              Quero Minha Lumi Liss
-              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <motion.div variants={fadeInUp} className="pt-6 flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
+            <button onClick={scrollToForm} className="w-full sm:w-auto px-10 py-5 rounded-2xl font-black text-xl bg-[#064e3b] text-white shadow-2xl shadow-primary/30 hover:shadow-primary/40 hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center gap-3 group">
+              RESERVAR AGORA
+              <ChevronRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
             </button>
-            <div className="flex items-center gap-2 text-sm font-medium text-primary">
-              <ShieldCheck className="w-5 h-5 text-green-600" />
-              Pague apenas ao receber
+            <div className="flex flex-col items-center md:items-start gap-1">
+              <div className="flex items-center gap-2 text-sm font-bold text-[#064e3b] bg-secondary/30 px-3 py-1 rounded-lg">
+                <ShieldCheck className="w-5 h-5" />
+                PAGAMENTO NA ENTREGA
+              </div>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-tighter">Não pedimos dados de cartão agora</span>
             </div>
           </motion.div>
         </motion.div>
@@ -293,7 +295,7 @@ export default function Home() {
       </section>
 
       {/* THE OFFER & ORDER FORM */}
-      <section id="pedido" className="py-24 bg-primary relative overflow-hidden">
+      <section id="pedido" className="py-24 bg-[#064e3b] relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
         
         <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -301,41 +303,49 @@ export default function Home() {
             
             {/* Offer Copy */}
             <div className="text-white space-y-8">
-              <div className="inline-block px-4 py-2 bg-white/10 rounded-full text-secondary-foreground bg-secondary font-bold text-sm tracking-wide">
-                ÚLTIMAS UNIDADES EM ESTOQUE
+              <div className="inline-block px-4 py-2 bg-secondary text-primary font-black text-xs tracking-[0.2em] rounded-lg">
+                OFERTA EXCLUSIVA DE LANÇAMENTO
               </div>
-              <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-                Transforme seus cabelos hoje.
+              <h2 className="text-4xl md:text-7xl font-extrabold leading-[1.1] tracking-tight">
+                Sua Melhor Versão, Sem Gastar com Salão.
               </h2>
               
-              <div className="bg-white/5 border border-white/20 p-6 rounded-2xl backdrop-blur-sm">
-                <div className="text-white/60 line-through text-xl mb-1">De R$ 249,90 por</div>
-                <div className="text-5xl font-bold text-white mb-4">
+              <div className="bg-white/10 border border-white/20 p-8 rounded-3xl backdrop-blur-md shadow-2xl">
+                <div className="flex items-baseline gap-3 mb-2">
+                  <span className="text-white/40 line-through text-xl">R$ 249,90</span>
+                  <span className="bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">48% OFF</span>
+                </div>
+                <div className="text-6xl md:text-7xl font-black text-white mb-6">
                   R$ 129,90
                 </div>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-lg">
-                    <CheckCircle2 className="w-6 h-6 text-green-400" />
-                    Frete Expresso
+                <ul className="space-y-4">
+                  <li className="flex items-center gap-4 text-lg font-medium">
+                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4 text-green-400" />
+                    </div>
+                    <span>Frete Grátis para todo o Brasil</span>
                   </li>
-                  <li className="flex items-center gap-3 text-lg font-bold text-secondary">
-                    <ShieldCheck className="w-6 h-6" />
-                    PAGUE APENAS NA ENTREGA
+                  <li className="flex items-center gap-4 text-xl font-black text-secondary animate-pulse">
+                    <Truck className="w-7 h-7" />
+                    PAGUE APENAS NO ATO DA ENTREGA
                   </li>
                 </ul>
               </div>
 
-              <p className="text-white/80 text-lg">
-                Preencha o formulário ao lado para reservar sua Lumi Liss. Nós enviamos para seu endereço e você só paga quando o produto estiver nas suas mãos.
-              </p>
+              <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                <ShieldCheck className="w-10 h-10 text-secondary shrink-0" />
+                <p className="text-white/90 text-sm leading-relaxed">
+                  <strong>Segurança Total:</strong> Você faz o pedido agora e só paga ao entregador quando estiver com o produto em mãos. Risco zero para você.
+                </p>
+              </div>
             </div>
 
             {/* Form Box */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              whileInView={{ opacity: 1, scale: 1 }} 
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-3xl shadow-2xl"
+              className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-border"
             >
               {isOrderComplete ? (
                 <div className="text-center py-12 space-y-6">
