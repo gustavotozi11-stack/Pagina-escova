@@ -1,0 +1,94 @@
+You are a senior UI/UX designer and high-conversion landing page optimization expert.
+I already have a finished landing page for a Brazilian beauty product called:
+Lumi Liss – Escova Alisadora 3 em 1
+Your task is NOT to rebuild the page.
+Your task is to redesign and improve the VISUAL STYLE and conversion structure while keeping the content.
+🎯 MAIN GOAL
+Make the page look:
+Premium
+Feminine
+Modern
+Clean
+Trustworthy
+High-converting
+Mobile optimized
+This must look like a professional Brazilian beauty brand — NOT dropshipping.
+🎨 COLOR STRATEGY (MANDATORY)
+Apply this exact color psychology:
+1️⃣ Background
+Main background: White or Off-White (#FFFFFF or #F8F8F8)
+Clean, spacious layout
+2️⃣ Brand Accent Color
+Use an elegant, sophisticated pink tone:
+#E91E63 OR
+#C2185B
+Use it for:
+Section titles
+Small highlights
+Icons
+Dividers
+Emphasis words
+Do NOT overuse it.
+3️⃣ CTA Button Color (VERY IMPORTANT)
+Primary buttons must be:
+🟢 Strong Green (#25D366 style)
+Reason:
+High contrast
+Payment association
+Trust trigger
+Brazilian familiarity
+Buttons must:
+Have rounded corners
+Medium shadow
+Strong hover effect
+Clear call-to-action text in Portuguese
+Example CTA text:
+“AGENDAR ENTREGA AGORA”
+“QUERO PAGAR NA ENTREGA”
+“RECEBER E PAGAR NA HORA”
+🛡 PAY ON DELIVERY VISUAL EMPHASIS
+Create a special highlighted section for:
+🚚 PAGAMENTO SOMENTE NA ENTREGA
+This section must:
+Have a very light green background
+Include trust-style layout
+Contain small security icons
+Feel safe and official
+Make this visually stronger than other sections.
+📐 LAYOUT IMPROVEMENTS
+Improve:
+Section spacing (more breathing room)
+Shorter paragraphs
+More visual hierarchy
+Strong bold highlights
+Better title sizing
+Mobile responsiveness
+Clear section separation
+Avoid:
+Long text blocks
+Overcrowded design
+Excessive colors
+Aggressive popups
+🧠 CONVERSION OPTIMIZATION
+Improve:
+Headline prominence
+Benefit bullet styling
+Add subtle shadow to product image
+Make price R$129,90 visually strong
+Repeat CTA buttons strategically
+Add subtle urgency (without fake countdown)
+✨ BRAND FEEL
+The final result must feel like:
+A beauty brand
+Trustworthy
+Clean salon aesthetic
+Feminine confidence
+Professional Brazilian e-commerce
+Return:
+Updated layout structure
+CSS style improvements
+Design improvements
+Suggested visual changes
+Improved button structure
+Any small changes that increase conversion
+All visible text must remain in Brazilian Portuguese.

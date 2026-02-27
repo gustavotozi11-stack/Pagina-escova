@@ -83,39 +83,39 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Floating Sticky Trust Badge */}
-      <div className="fixed top-0 w-full z-50 bg-[#064e3b] text-white py-2.5 text-center text-xs md:text-sm font-bold tracking-wider shadow-lg flex items-center justify-center gap-3 px-4">
-        <Truck className="w-4 h-4 text-secondary" />
-        <span className="uppercase">🚚 Pagamento Somente na Entrega • Frete Grátis Hoje</span>
+      <div className="fixed top-0 w-full z-50 bg-[#F8F8F8] text-[#C2185B] py-2.5 text-center text-xs md:text-sm font-bold tracking-wider shadow-sm border-b border-[#C2185B]/10 flex items-center justify-center gap-3 px-4 backdrop-blur-md bg-opacity-90">
+        <Truck className="w-4 h-4" />
+        <span className="uppercase">PAGAMENTO SOMENTE NA ENTREGA • FRETE GRÁTIS HOJE</span>
       </div>
 
       {/* HERO SECTION */}
-      <section className="pt-28 pb-16 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+      <section className="pt-28 pb-16 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 bg-[#FFFFFF]">
         <motion.div 
           className="flex-1 text-center md:text-left space-y-8"
           initial="hidden" animate="visible" variants={staggerContainer}
         >
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary/40 text-primary border border-primary/10 font-bold text-xs uppercase tracking-widest mb-2">
+          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C2185B]/10 text-[#C2185B] border border-[#C2185B]/20 font-bold text-xs uppercase tracking-widest mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Tecnologia de Salão Americana</span>
           </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] text-balance tracking-tight">
-            Cabelo de Salão em <span className="text-[#064e3b]">15 Minutos</span>, Sem Sair de Casa.
+          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#1A1A1A] leading-[1.1] text-balance tracking-tight">
+            Cabelo de Salão em <span className="text-[#C2185B]">15 Minutos</span>, Sem Sair de Casa.
           </motion.h1>
-          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-muted-foreground max-w-2xl text-balance leading-relaxed">
-            A única com <strong>25 placas de cerâmica</strong> que alisam desde a raiz sem queimar. Brilho espelhado e zero frizz com segurança total.
+          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-[#4A4A4A] max-w-2xl text-balance leading-relaxed">
+            A única com <strong>25 placas de cerâmica</strong> que alisam desde a raiz sem queimar os fios. Brilho espelhado e zero frizz.
           </motion.p>
           
           <motion.div variants={fadeInUp} className="pt-6 flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
-            <button onClick={scrollToForm} className="w-full sm:w-auto px-10 py-5 rounded-2xl font-black text-xl bg-[#064e3b] text-white shadow-2xl shadow-primary/30 hover:shadow-primary/40 hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center gap-3 group">
-              RESERVAR AGORA
+            <button onClick={scrollToForm} className="w-full sm:w-auto px-10 py-5 rounded-2xl font-black text-xl bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center gap-3 group uppercase">
+              QUERO PAGAR NA ENTREGA
               <ChevronRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
             </button>
             <div className="flex flex-col items-center md:items-start gap-1">
-              <div className="flex items-center gap-2 text-sm font-bold text-[#064e3b] bg-secondary/30 px-3 py-1 rounded-lg">
+              <div className="flex items-center gap-2 text-sm font-bold text-[#25D366] bg-[#25D366]/10 px-3 py-1 rounded-lg">
                 <ShieldCheck className="w-5 h-5" />
                 PAGAMENTO NA ENTREGA
               </div>
-              <span className="text-[10px] text-muted-foreground uppercase tracking-tighter">Não pedimos dados de cartão agora</span>
+              <span className="text-[10px] text-[#666] uppercase tracking-tighter">Não pedimos dados de cartão agora</span>
             </div>
           </motion.div>
         </motion.div>
@@ -136,11 +136,11 @@ export default function Home() {
       </section>
 
       {/* PAIN SECTION */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-[#FFFFFF]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h2 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold text-primary mb-12"
+            className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-16 tracking-tight"
           >
             Ainda sofre com as antigas chapinhas?
           </motion.h2>
@@ -148,7 +148,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-3 gap-8">
             {[
               { icon: Clock, title: "Horas Perdidas", desc: "Acordar mais cedo e gastar até 1 hora separando mechas." },
-              { icon: CheckCircle2, title: "Cabelo Queimado", desc: "Placas que não distribuem o calor e fritam as pontas." },
+              { icon: Scissors, title: "Cabelo Queimado", desc: "Placas que não distribuem o calor e fritam as pontas." },
               { icon: CheckCircle2, title: "Frizz Constante", desc: "Qualquer umidade faz o cabelo voltar a armar na hora." }
             ].map((item, i) => (
               <motion.div 
@@ -157,13 +157,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className="bg-background p-8 rounded-2xl border border-border text-center"
+                className="bg-[#F8F8F8] p-8 rounded-[2rem] border border-[#C2185B]/5 text-center shadow-sm"
               >
-                <div className="w-16 h-16 mx-auto bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6">
+                <div className="w-16 h-16 mx-auto bg-[#C2185B]/10 text-[#C2185B] rounded-2xl flex items-center justify-center mb-6">
                   <item.icon className="w-8 h-8" />
                 </div>
-                <h3 className="font-bold text-xl mb-3 text-primary">{item.title}</h3>
-                <p className="text-muted-foreground">{item.desc}</p>
+                <h3 className="font-bold text-xl mb-3 text-[#1A1A1A]">{item.title}</h3>
+                <p className="text-[#666] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -171,46 +171,48 @@ export default function Home() {
       </section>
 
       {/* SOLUTION / FEATURES */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/10">
+      <section className="py-24 bg-[#F8F8F8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-6 tracking-tight">
               A Tecnologia por Trás da Perfeição
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Desenvolvida para proteger enquanto transforma. A Lumi Liss é a evolução do alisamento capilar.
+            <p className="text-lg text-[#666] max-w-2xl mx-auto leading-relaxed">
+              Desenvolvida para proteger enquanto transforma. A Lumi Liss é a evolução do alisamento capilar doméstico.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <img 
-                src={tempSettingsImg} 
-                alt="5 níveis de temperatura" 
-                className="rounded-3xl shadow-2xl w-full object-cover"
-              />
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+              <div className="relative">
+                <div className="absolute inset-0 bg-[#C2185B]/5 rounded-[2.5rem] transform rotate-3"></div>
+                <img 
+                  src={tempSettingsImg} 
+                  alt="5 níveis de temperatura" 
+                  className="relative z-10 rounded-[2rem] shadow-2xl w-full object-cover border-4 border-white"
+                />
+              </div>
             </motion.div>
 
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-              className="space-y-8"
+              className="space-y-10"
             >
               {[
                 { title: "25 Mini Placas de Cerâmica", desc: "Alisam uma mecha inteira de uma só vez, como se fossem 25 pranchas trabalhando juntas." },
                 { title: "5 Níveis de Temperatura", desc: "Ajuste ideal para todo tipo de cabelo, de 130ºC (cabelos finos) até 210ºC (cabelos grossos)." },
-                { title: "Tecnologia Íons Antifrizz", desc: "Sela as cutículas instantaneamente, garantindo brilho e maciez duradouros." },
-                { title: "Sistema Anti-Queimaduras", desc: "Design inteligente que permite encostar na raiz sem queimar o couro cabeludo." }
+                { title: "Tecnologia Íons Antifrizz", desc: "Sela as cutículas instantaneamente, garantindo brilho espelhado e maciez duradoura." }
               ].map((item, i) => (
-                <motion.div key={i} variants={fadeInUp} className="flex gap-4">
-                  <div className="mt-1 shrink-0 w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                    <CheckCircle2 className="w-5 h-5" />
+                <motion.div key={i} variants={fadeInUp} className="flex gap-6">
+                  <div className="mt-1 shrink-0 w-10 h-10 rounded-xl bg-[#C2185B]/10 text-[#C2185B] flex items-center justify-center">
+                    <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl text-primary mb-1">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <h3 className="font-bold text-xl text-[#1A1A1A] mb-2">{item.title}</h3>
+                    <p className="text-[#666] leading-relaxed">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -222,20 +224,20 @@ export default function Home() {
       {/* TRANSFORMATION */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div 
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
               className="order-2 lg:order-1"
             >
-              <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold text-primary mb-6">
-                Transformação Impecável em Minutos
+              <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-8 leading-tight tracking-tight">
+                Brilho Espelhado e Liso <span className="text-[#C2185B]">Natural.</span>
               </motion.h2>
-              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground mb-8">
-                Esqueça o efeito "esticado artificial" das pranchas tradicionais. A Lumi Liss proporciona um liso natural, com movimento e volume controlado.
+              <motion.p variants={fadeInUp} className="text-lg text-[#666] mb-10 leading-relaxed">
+                Esqueça o efeito "esticado artificial" das pranchas tradicionais. A Lumi Liss proporciona movimento e um volume controlado que realça a beleza real do seu cabelo.
               </motion.p>
-              <motion.button variants={fadeInUp} onClick={scrollToForm} className="px-8 py-4 rounded-xl font-bold text-lg bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all flex items-center gap-2">
-                Quero esse resultado
-                <Sparkles className="w-5 h-5" />
+              <motion.button variants={fadeInUp} onClick={scrollToForm} className="px-10 py-5 rounded-2xl font-black text-xl bg-[#25D366] text-white shadow-lg hover:shadow-[#25D366]/30 transition-all flex items-center gap-3 uppercase">
+                RECEBER E PAGAR NA HORA
+                <Sparkles className="w-6 h-6" />
               </motion.button>
             </motion.div>
             
@@ -243,11 +245,11 @@ export default function Home() {
               initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
               className="order-1 lg:order-2 relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-secondary/40 to-transparent rounded-3xl transform rotate-3"></div>
+              <div className="absolute inset-0 bg-[#C2185B]/5 rounded-[3rem] transform rotate-2"></div>
               <img 
                 src={transformationImg} 
                 alt="Antes e depois de usar a escova" 
-                className="relative z-10 rounded-3xl shadow-2xl border-4 border-white w-full"
+                className="relative z-10 rounded-[2.5rem] shadow-2xl border-4 border-white w-full"
               />
             </motion.div>
           </div>
@@ -295,47 +297,47 @@ export default function Home() {
       </section>
 
       {/* THE OFFER & ORDER FORM */}
-      <section id="pedido" className="py-24 bg-[#064e3b] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+      <section id="pedido" className="py-24 bg-[#F8F8F8] relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-5 pointer-events-none"></div>
         
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             
             {/* Offer Copy */}
-            <div className="text-white space-y-8">
-              <div className="inline-block px-4 py-2 bg-secondary text-primary font-black text-xs tracking-[0.2em] rounded-lg">
+            <div className="text-[#1A1A1A] space-y-8">
+              <div className="inline-block px-4 py-2 bg-[#C2185B] text-white font-black text-xs tracking-[0.2em] rounded-lg">
                 OFERTA EXCLUSIVA DE LANÇAMENTO
               </div>
-              <h2 className="text-4xl md:text-7xl font-extrabold leading-[1.1] tracking-tight">
-                Sua Melhor Versão, Sem Gastar com Salão.
+              <h2 className="text-4xl md:text-7xl font-extrabold leading-[1.1] tracking-tight text-[#1A1A1A]">
+                Sua Melhor Versão, <span className="text-[#C2185B]">Sem Gastar com Salão.</span>
               </h2>
               
-              <div className="bg-white/10 border border-white/20 p-8 rounded-3xl backdrop-blur-md shadow-2xl">
+              <div className="bg-[#DCFCE7] border border-[#25D366]/20 p-8 rounded-3xl shadow-xl">
                 <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-white/40 line-through text-xl">R$ 249,90</span>
-                  <span className="bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">48% OFF</span>
+                  <span className="text-[#666] line-through text-xl">R$ 249,90</span>
+                  <span className="bg-[#C2185B] text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">48% OFF</span>
                 </div>
-                <div className="text-6xl md:text-7xl font-black text-white mb-6">
+                <div className="text-6xl md:text-7xl font-black text-[#1A1A1A] mb-6">
                   R$ 129,90
                 </div>
                 <ul className="space-y-4">
-                  <li className="flex items-center gap-4 text-lg font-medium">
-                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <CheckCircle2 className="w-4 h-4 text-green-400" />
+                  <li className="flex items-center gap-4 text-lg font-medium text-[#4A4A4A]">
+                    <div className="w-6 h-6 rounded-full bg-[#25D366]/20 flex items-center justify-center">
+                      <CheckCircle2 className="w-4 h-4 text-[#25D366]" />
                     </div>
                     <span>Frete Grátis para todo o Brasil</span>
                   </li>
-                  <li className="flex items-center gap-4 text-xl font-black text-secondary animate-pulse">
+                  <li className="flex items-center gap-4 text-xl font-black text-[#25D366] animate-pulse">
                     <Truck className="w-7 h-7" />
                     PAGUE APENAS NO ATO DA ENTREGA
                   </li>
                 </ul>
               </div>
 
-              <div className="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
-                <ShieldCheck className="w-10 h-10 text-secondary shrink-0" />
-                <p className="text-white/90 text-sm leading-relaxed">
-                  <strong>Segurança Total:</strong> Você faz o pedido agora e só paga ao entregador quando estiver com o produto em mãos. Risco zero para você.
+              <div className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-[#25D366]/20 shadow-sm">
+                <ShieldCheck className="w-12 h-12 text-[#25D366] shrink-0" />
+                <p className="text-[#4A4A4A] text-sm leading-relaxed">
+                  <strong className="text-[#1A1A1A]">Segurança Garantida:</strong> Você faz o pedido agora e só paga ao entregador quando estiver com o produto em mãos. Risco zero para você.
                 </p>
               </div>
             </div>
@@ -345,7 +347,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.95 }} 
               whileInView={{ opacity: 1, scale: 1 }} 
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-border"
+              className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1)] border border-[#C2185B]/5"
             >
               {isOrderComplete ? (
                 <div className="text-center py-12 space-y-6">
