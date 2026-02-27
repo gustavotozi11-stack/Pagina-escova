@@ -104,12 +104,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#1A1A1A] overflow-x-hidden">
-      {/* 1. STICKY TOP BAR */}
-      <div className="bg-gradient-to-r from-[#E91E63] to-[#C2185B] text-white py-3 text-center text-[11px] md:text-xs font-black uppercase tracking-[0.15em] flex items-center justify-center gap-2 px-4 shadow-sm sticky top-0 z-[100]">
-        <Clock className="w-3.5 h-3.5" />
-        <span>Oferta por tempo limitado: 48% de desconto</span>
-      </div>
-
       {/* 2. NEW HERO SECTION (Inspired by Image Structure) */}
       <section className="pt-12 pb-12 px-4 max-w-xl mx-auto text-center space-y-6">
         <motion.h1 
@@ -294,7 +288,7 @@ export default function Home() {
 
               <a 
                 href="https://wa.me/5500000000000"
-                className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_15px_30px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3"
+                className="w-full py-4 md:py-6 rounded-full bg-[#25D366] text-white font-black text-lg md:text-xl shadow-[0_15px_30px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3 text-center px-4"
               >
                 Garantir Minha Oferta
               </a>
