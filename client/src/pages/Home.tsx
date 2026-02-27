@@ -110,78 +110,92 @@ export default function Home() {
         <span>Oferta por tempo limitado: 48% de desconto</span>
       </div>
 
-      {/* 2. HERO SECTION */}
-      <section className="pt-16 pb-12 px-4 max-w-xl mx-auto text-center space-y-8">
+      {/* 2. NEW HERO SECTION (Inspired by Image Structure) */}
+      <section className="pt-12 pb-12 px-4 max-w-xl mx-auto text-center space-y-6">
         <motion.h1 
           initial="hidden" animate="visible" variants={fadeInUp}
-          className="text-[2.5rem] md:text-5xl font-black leading-[1.1] tracking-tight px-2"
+          className="text-3xl md:text-4xl font-black leading-tight text-[#1A1A1A] px-2"
         >
-          Escolha uma Oferta e <span className="text-[#C2185B]">Economize Mais</span>
+          Tenha o Liso Perfeito em <span className="text-[#C2185B]">15 Minutos</span> e Recupere o Brilho dos seus Cabelos
         </motion.h1>
 
-        {/* Product Image Display */}
+        <motion.div 
+          initial="hidden" animate="visible" variants={fadeInUp}
+          className="space-y-2"
+        >
+          <p className="text-xl font-black text-[#C2185B] uppercase tracking-wide">
+            RISCO ZERO: <span className="text-[#1A1A1A]">Só pague quando o produto chegar na sua mão</span>
+          </p>
+        </motion.div>
+
+        {/* Video Placeholder Style (Representing the video/image in the reference) */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
-          className="relative max-w-sm mx-auto"
+          className="relative rounded-[2.5rem] overflow-hidden shadow-2xl bg-black aspect-video group"
         >
-          <img src={productWhiteBgImg} alt="Lumi Liss" className="w-full h-auto drop-shadow-2xl" />
-          <div className="absolute top-4 right-4 bg-[#C2185B] text-white font-black text-sm px-4 py-2 rounded-full shadow-lg transform rotate-12">
-            TOP VENDAS
+          <img 
+            src={transformationImg} 
+            alt="Resultado Lumi Liss" 
+            className="w-full h-full object-cover opacity-80" 
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-20 h-20 bg-[#C2185B] rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+              <svg viewBox="0 0 24 24" className="w-10 h-10 text-white fill-current ml-1">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+             <div className="w-2 h-2 bg-[#25D366] rounded-full animate-pulse" />
+             <span className="text-[10px] font-black uppercase tracking-wider text-[#1A1A1A]">Pague na Entrega</span>
+          </div>
+          <div className="absolute top-4 right-4 bg-[#E91E63] text-white font-black text-sm px-4 py-1.5 rounded-xl shadow-lg">
+            -48% OFF
           </div>
         </motion.div>
 
-        {/* Offer Card */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="rounded-[3rem] border-2 border-[#C2185B]/5 p-10 shadow-[0_30px_60px_-15px_rgba(194,24,91,0.1)] bg-white space-y-8"
+          initial="hidden" animate="visible" variants={fadeInUp}
+          className="flex items-center justify-center gap-2 pt-2"
         >
-          <div className="space-y-2">
-            <h3 className="text-2xl font-black tracking-tight">1 Lumi Liss</h3>
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-[#999] line-through text-xl font-bold">R$ 249,90</span>
-              <span className="bg-[#C2185B] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">48% OFF</span>
-            </div>
-            <div className="text-6xl font-black text-[#1A1A1A] tracking-tighter">R$ 129,90</div>
-          </div>
+          <Heart className="w-5 h-5 text-[#C2185B] fill-current" />
+          <span className="font-black text-[#1A1A1A] text-lg">+3.000 Mulheres Satisfeitas</span>
+        </motion.div>
 
-          <div className="bg-[#DCFCE7]/60 border border-[#25D366]/20 inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[#15803d] font-black text-sm uppercase tracking-wide">
-            <ShieldCheck className="w-5 h-5" />
-            <span>Pagamento na Entrega</span>
+        <motion.div 
+          initial="hidden" animate="visible" variants={fadeInUp}
+          className="space-y-4"
+        >
+          <div className="flex items-center justify-center gap-1.5 text-yellow-400">
+             {[...Array(5)].map((_, j) => <Star key={j} className="w-6 h-6 fill-current" />)}
+             <span className="text-[#1A1A1A] font-black ml-1">(4.9/5.0)</span>
           </div>
-
-          <ul className="text-left space-y-5 pt-4 max-w-[240px] mx-auto">
-            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
-              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-4 h-4 text-white" />
-              </div>
-              <span>Frete Grátis</span>
-            </li>
-            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
-              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-4 h-4 text-white" />
-              </div>
-              <span>Pagamento na Entrega</span>
-            </li>
-            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
-              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-4 h-4 text-white" />
-              </div>
-              <span>Receba em até 24 horas</span>
-            </li>
-          </ul>
 
           <button 
             onClick={scrollToForm}
-            className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_15px_30px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest"
+            className="w-full py-6 rounded-full bg-gradient-to-r from-[#E91E63] to-[#C2185B] text-white font-black text-xl shadow-[0_20px_40px_-10px_rgba(194,24,91,0.4)] hover:shadow-[0_25px_50px_-10px_rgba(194,24,91,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest"
           >
-            Aproveitar Agora
+            Quero Aproveitar a Oferta
           </button>
           
-          <div className="flex flex-col items-center gap-3 pt-2">
-             <div className="flex gap-1 text-yellow-400">
-                {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
-              </div>
-              <span className="text-sm font-black text-[#C2185B] uppercase tracking-[0.2em] animate-pulse">Últimas unidades em estoque</span>
+          <p className="text-[#C2185B] font-black uppercase tracking-[0.2em] text-sm animate-pulse">Últimas unidades</p>
+        </motion.div>
+
+        <motion.div 
+          initial="hidden" animate="visible" variants={fadeInUp}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-gray-100"
+        >
+          <div className="flex items-center justify-center gap-2 text-[#1A1A1A] font-bold text-sm">
+            <Truck className="w-4 h-4" />
+            <span>Frete Grátis</span>
+          </div>
+          <div className="flex items-center justify-center gap-2 text-[#1A1A1A] font-bold text-sm">
+            <ShieldCheck className="w-4 h-4" />
+            <span>Pagamento na Entrega</span>
+          </div>
+          <div className="flex items-center justify-center gap-2 text-[#1A1A1A] font-bold text-sm">
+            <Clock className="w-4 h-4" />
+            <span>Receba em até 24 horas</span>
           </div>
         </motion.div>
       </section>
@@ -190,14 +204,8 @@ export default function Home() {
       <section className="py-24 px-4 bg-[#FDF2F8]">
         <div className="max-w-xl mx-auto text-center space-y-16">
           <div className="space-y-4">
-            <div className="bg-white/80 backdrop-blur-sm border border-[#C2185B]/10 rounded-full py-2 px-6 inline-flex items-center gap-3 shadow-sm">
-               <div className="flex -space-x-2">
-                  {[...Array(4)].map((_, i) => <div key={i} className="w-6 h-6 rounded-full bg-[#C2185B] border-2 border-white" />)}
-               </div>
-               <span className="text-xs font-black uppercase tracking-wider text-[#C2185B]">+3.000 mulheres transformadas</span>
-            </div>
             <h2 className="text-[2.25rem] font-black leading-tight tracking-tight px-4">
-              Por que escolher a nossa <span className="text-[#C2185B] border-b-8 border-[#C2185B]/10">Lumi Liss?</span>
+              Por que milhares de mulheres escolhem nossa <span className="text-[#C2185B]">Lumi Liss?</span>
             </h2>
           </div>
 
