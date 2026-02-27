@@ -237,72 +237,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. STRATEGIC TRUST SECTION */}
-      <section className="py-24 px-4 bg-white">
-        <div className="max-w-xl mx-auto">
-          <div className="bg-[#DCFCE7] border-2 border-[#25D366]/20 p-12 rounded-[3.5rem] text-center space-y-8 shadow-[0_40px_80px_-20px_rgba(37,211,102,0.15)] relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full -mr-16 -mt-16" />
-             <div className="w-24 h-24 bg-[#25D366] text-white rounded-full flex items-center justify-center mx-auto shadow-2xl relative z-10">
-                <Truck className="w-12 h-12" />
-             </div>
-             <div className="space-y-4 relative z-10">
-               <h3 className="text-3xl font-black text-[#1A1A1A] tracking-tighter">Frete Grátis + <br/>Pagamento na Entrega!</h3>
-               <p className="text-[#4A4A4A] font-bold text-lg leading-relaxed">
-                 Faça seu pedido agora e pague somente quando o entregador bater no seu portão. Risco ZERO total!
-               </p>
-             </div>
-             <button onClick={scrollToForm} className="bg-white text-[#15803d] font-black py-4 px-8 rounded-2xl shadow-md border border-[#25D366]/20 uppercase tracking-widest text-sm hover:bg-[#25D366] hover:text-white transition-all">
-               Fazer Pedido Seguro
-             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. TESTIMONIALS */}
-      <section className="py-24 px-4 bg-[#F8F8F8]">
-        <div className="max-w-xl mx-auto space-y-16">
-          <div className="text-center space-y-4">
-            <h2 className="text-4xl font-black tracking-tight">O que elas dizem...</h2>
-            <p className="text-[#666] font-bold">Depoimentos reais de nossas clientes</p>
-          </div>
-          
-          <div className="space-y-8">
-            {[
-              { name: "Juliana Costa", age: "32 anos", city: "São Paulo, SP", text: "Eu estava cansada de gastar horas no salão. A Lumi Liss salvou minha rotina! É muito prática e o liso fica perfeito.", result: "Resultado impecável na 1ª passada" },
-              { name: "Carla Mendes", age: "45 anos", city: "Curitiba, PR", text: "Tive receio de comprar, mas o pagamento na entrega me deu confiança. O entregador foi super educado e o produto é nota 10.", result: "Segurança total na compra" },
-              { name: "Ana Paula Silva", age: "28 anos", city: "Belo Horizonte, MG", text: "Meu cabelo é bem volumoso e a escova alisou tudo em minutos. O brilho que dá é incrível, parece que usei óleo reparador.", result: "Cabelo com brilho espelhado" }
-            ].map((review, i) => (
-              <motion.div 
-                key={i}
-                className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 space-y-6 relative"
-              >
-                <div className="absolute top-10 right-10 opacity-[0.05]">
-                   <ThumbsUp className="w-16 h-16 text-[#C2185B]" />
-                </div>
-                <div className="flex items-center gap-5">
-                  <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#E91E63] to-[#C2185B] text-white flex items-center justify-center font-black text-2xl shadow-inner">
-                    {review.name[0]}
-                  </div>
-                  <div className="text-left space-y-1">
-                    <h4 className="font-black text-xl tracking-tight">{review.name}</h4>
-                    <span className="text-xs font-black text-[#999] uppercase tracking-widest">{review.age} • {review.city}</span>
-                  </div>
-                </div>
-                <div className="flex gap-1.5 text-yellow-400">
-                  {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
-                </div>
-                <p className="text-[#4A4A4A] text-lg leading-relaxed italic">"{review.text}"</p>
-                <div className="bg-[#C2185B]/5 px-5 py-4 rounded-[1.5rem] border-l-[6px] border-[#C2185B] flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-[#C2185B]" />
-                  <span className="text-sm font-black uppercase tracking-wide text-[#C2185B]">Resultado: {review.result}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. FINAL CTA & OFFER */}
+      {/* 4. FINAL CTA & OFFER */}
       <section id="pedido" className="py-24 px-4 bg-gradient-to-b from-[#E91E63] to-[#C2185B] text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
         <div className="max-w-xl mx-auto space-y-16 relative z-10">
@@ -321,7 +256,7 @@ export default function Home() {
           >
             <div className="space-y-8">
               <div className="space-y-2 text-center">
-                <h3 className="text-2xl font-black tracking-tight uppercase">1 Lumi Liss</h3>
+                <h3 className="text-2xl font-black tracking-tight uppercase">Escova Lumi Liss 3 em 1</h3>
                 <div className="flex items-center justify-center gap-3">
                   <span className="text-[#999] line-through text-xl font-bold">R$ 249,90</span>
                   <span className="bg-[#C2185B] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">48% OFF</span>
@@ -372,6 +307,27 @@ export default function Home() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* 5. STRATEGIC TRUST SECTION */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-xl mx-auto">
+          <div className="bg-[#DCFCE7] border-2 border-[#25D366]/20 p-12 rounded-[3.5rem] text-center space-y-8 shadow-[0_40px_80px_-20px_rgba(37,211,102,0.15)] relative overflow-hidden">
+             <div className="absolute top-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full -mr-16 -mt-16" />
+             <div className="w-24 h-24 bg-[#25D366] text-white rounded-full flex items-center justify-center mx-auto shadow-2xl relative z-10">
+                <Truck className="w-12 h-12" />
+             </div>
+             <div className="space-y-4 relative z-10">
+               <h3 className="text-3xl font-black text-[#1A1A1A] tracking-tighter">Frete Grátis + <br/>Pagamento na Entrega!</h3>
+               <p className="text-[#4A4A4A] font-bold text-lg leading-relaxed">
+                 Faça seu pedido agora e pague somente quando o entregador bater no seu portão. Risco ZERO total!
+               </p>
+             </div>
+             <button onClick={scrollToForm} className="bg-white text-[#15803d] font-black py-4 px-8 rounded-2xl shadow-md border border-[#25D366]/20 uppercase tracking-widest text-sm hover:bg-[#25D366] hover:text-white transition-all">
+               Fazer Pedido Seguro
+             </button>
+          </div>
         </div>
       </section>
 
