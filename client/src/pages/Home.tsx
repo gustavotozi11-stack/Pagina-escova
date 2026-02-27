@@ -11,7 +11,12 @@ import {
   Truck, 
   Star, 
   ChevronRight,
-  Scissors
+  Heart,
+  MessageCircle,
+  Shield,
+  RotateCcw,
+  BadgeCheck,
+  ThumbsUp
 } from "lucide-react";
 
 import { useCreateOrder } from "@/hooks/use-orders";
@@ -35,6 +40,32 @@ const formSchema = api.orders.create.input.extend({
 
 type FormValues = z.infer<typeof formSchema>;
 
+const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="border-b border-gray-100 py-5">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex justify-between items-center text-left font-bold text-[#1A1A1A] text-lg py-2 group"
+      >
+        <span className="group-hover:text-[#C2185B] transition-colors">{question}</span>
+        <div className={`w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center transition-transform ${isOpen ? 'rotate-180 bg-[#C2185B] border-[#C2185B] text-white' : ''}`}>
+          <ChevronRight className="w-4 h-4 rotate-90" />
+        </div>
+      </button>
+      {isOpen && (
+        <motion.div 
+          initial={{ opacity: 0, height: 0 }} 
+          animate={{ opacity: 1, height: "auto" }}
+          className="text-[#666] mt-3 leading-relaxed text-base"
+        >
+          {answer}
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
 export default function Home() {
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const createOrder = useCreateOrder();
@@ -57,7 +88,6 @@ export default function Home() {
       onSuccess: () => {
         setIsOrderComplete(true);
         form.reset();
-        // Scroll to top of form section to show success message clearly
         document.getElementById("pedido")?.scrollIntoView({ behavior: "smooth" });
       },
     });
@@ -72,223 +102,191 @@ export default function Home() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
-      {/* Floating Sticky Trust Badge */}
-      <div className="fixed top-0 w-full z-50 bg-[#F8F8F8] text-[#C2185B] py-2.5 text-center text-xs md:text-sm font-bold tracking-wider shadow-sm border-b border-[#C2185B]/10 flex items-center justify-center gap-3 px-4 backdrop-blur-md bg-opacity-90">
-        <Truck className="w-4 h-4" />
-        <span className="uppercase">PAGAMENTO SOMENTE NA ENTREGA • FRETE GRÁTIS HOJE</span>
+    <div className="min-h-screen bg-white font-sans text-[#1A1A1A] overflow-x-hidden">
+      {/* 1. STICKY TOP BAR */}
+      <div className="bg-gradient-to-r from-[#E91E63] to-[#C2185B] text-white py-3 text-center text-[11px] md:text-xs font-black uppercase tracking-[0.15em] flex items-center justify-center gap-2 px-4 shadow-sm sticky top-0 z-[100]">
+        <Clock className="w-3.5 h-3.5" />
+        <span>Oferta por tempo limitado: 48% de desconto</span>
       </div>
 
-      {/* HERO SECTION */}
-      <section className="pt-28 pb-16 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 bg-[#FFFFFF]">
-        <motion.div 
-          className="flex-1 text-center md:text-left space-y-8"
-          initial="hidden" animate="visible" variants={staggerContainer}
+      {/* 2. HERO SECTION */}
+      <section className="pt-16 pb-12 px-4 max-w-xl mx-auto text-center space-y-8">
+        <motion.h1 
+          initial="hidden" animate="visible" variants={fadeInUp}
+          className="text-[2.5rem] md:text-5xl font-black leading-[1.1] tracking-tight px-2"
         >
-          <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C2185B]/10 text-[#C2185B] border border-[#C2185B]/20 font-bold text-xs uppercase tracking-widest mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Tecnologia de Salão Americana</span>
-          </motion.div>
-          <motion.h1 variants={fadeInUp} className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#1A1A1A] leading-[1.1] text-balance tracking-tight">
-            Cabelo de Salão em <span className="text-[#C2185B]">15 Minutos</span>, Sem Sair de Casa.
-          </motion.h1>
-          <motion.p variants={fadeInUp} className="text-lg md:text-2xl text-[#4A4A4A] max-w-2xl text-balance leading-relaxed">
-            A única com <strong>25 placas de cerâmica</strong> que alisam desde a raiz sem queimar os fios. Brilho espelhado e zero frizz.
-          </motion.p>
-          
-          <motion.div variants={fadeInUp} className="pt-6 flex flex-col sm:flex-row items-center gap-6 justify-center md:justify-start">
-            <button onClick={scrollToForm} className="w-full sm:w-auto px-10 py-5 rounded-2xl font-black text-xl bg-[#25D366] text-white shadow-lg shadow-[#25D366]/20 hover:shadow-[#25D366]/40 hover:-translate-y-1.5 transition-all duration-300 flex items-center justify-center gap-3 group uppercase">
-              QUERO PAGAR NA ENTREGA
-              <ChevronRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
-            </button>
-            <div className="flex flex-col items-center md:items-start gap-1">
-              <div className="flex items-center gap-2 text-sm font-bold text-[#25D366] bg-[#25D366]/10 px-3 py-1 rounded-lg">
-                <ShieldCheck className="w-5 h-5" />
-                PAGAMENTO NA ENTREGA
-              </div>
-              <span className="text-[10px] text-[#666] uppercase tracking-tighter">Não pedimos dados de cartão agora</span>
-            </div>
-          </motion.div>
+          Escolha uma Oferta e <span className="text-[#C2185B]">Economize Mais</span>
+        </motion.h1>
+
+        {/* Product Image Display */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+          className="relative max-w-sm mx-auto"
+        >
+          <img src={productWhiteBgImg} alt="Lumi Liss" className="w-full h-auto drop-shadow-2xl" />
+          <div className="absolute top-4 right-4 bg-[#C2185B] text-white font-black text-sm px-4 py-2 rounded-full shadow-lg transform rotate-12">
+            TOP VENDAS
+          </div>
         </motion.div>
 
+        {/* Offer Card */}
         <motion.div 
-          className="flex-1 relative"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          className="rounded-[3rem] border-2 border-[#C2185B]/5 p-10 shadow-[0_30px_60px_-15px_rgba(194,24,91,0.1)] bg-white space-y-8"
         >
-          <div className="absolute inset-0 bg-secondary/20 rounded-full blur-3xl transform -translate-y-10"></div>
-          <img 
-            src={productWhiteBgImg} 
-            alt="Lumi Liss Escova Alisadora" 
-            className="relative z-10 w-full max-w-md mx-auto drop-shadow-2xl mix-blend-multiply"
-          />
+          <div className="space-y-2">
+            <h3 className="text-2xl font-black tracking-tight">1 Lumi Liss</h3>
+            <div className="flex items-center justify-center gap-3">
+              <span className="text-[#999] line-through text-xl font-bold">R$ 249,90</span>
+              <span className="bg-[#C2185B] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">48% OFF</span>
+            </div>
+            <div className="text-6xl font-black text-[#1A1A1A] tracking-tighter">R$ 129,90</div>
+          </div>
+
+          <div className="bg-[#DCFCE7]/60 border border-[#25D366]/20 inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[#15803d] font-black text-sm uppercase tracking-wide">
+            <ShieldCheck className="w-5 h-5" />
+            <span>Pagamento na Entrega</span>
+          </div>
+
+          <ul className="text-left space-y-5 pt-4 max-w-[240px] mx-auto">
+            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4 text-white" />
+              </div>
+              <span>Frete Grátis</span>
+            </li>
+            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4 text-white" />
+              </div>
+              <span>Pagamento na Entrega</span>
+            </li>
+            <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+              <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                <CheckCircle2 className="w-4 h-4 text-white" />
+              </div>
+              <span>Receba em até 24 horas</span>
+            </li>
+          </ul>
+
+          <button 
+            onClick={scrollToForm}
+            className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_15px_30px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest"
+          >
+            Aproveitar Agora
+          </button>
+          
+          <div className="flex flex-col items-center gap-3 pt-2">
+             <div className="flex gap-1 text-yellow-400">
+                {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+              </div>
+              <span className="text-sm font-black text-[#C2185B] uppercase tracking-[0.2em] animate-pulse">Últimas unidades em estoque</span>
+          </div>
         </motion.div>
       </section>
 
-      {/* PAIN SECTION */}
-      <section className="py-24 bg-[#FFFFFF]">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.h2 
-            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeInUp}
-            className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-16 tracking-tight"
-          >
-            Ainda sofre com as antigas chapinhas?
-          </motion.h2>
-          
-          <div className="grid sm:grid-cols-3 gap-8">
+      {/* 3. BENEFITS SECTION */}
+      <section className="py-24 px-4 bg-[#FDF2F8]">
+        <div className="max-w-xl mx-auto text-center space-y-16">
+          <div className="space-y-4">
+            <div className="bg-white/80 backdrop-blur-sm border border-[#C2185B]/10 rounded-full py-2 px-6 inline-flex items-center gap-3 shadow-sm">
+               <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => <div key={i} className="w-6 h-6 rounded-full bg-[#C2185B] border-2 border-white" />)}
+               </div>
+               <span className="text-xs font-black uppercase tracking-wider text-[#C2185B]">+3.000 mulheres transformadas</span>
+            </div>
+            <h2 className="text-[2.25rem] font-black leading-tight tracking-tight px-4">
+              Por que escolher a nossa <span className="text-[#C2185B] border-b-8 border-[#C2185B]/10">Lumi Liss?</span>
+            </h2>
+          </div>
+
+          <div className="space-y-8">
             {[
-              { icon: Clock, title: "Horas Perdidas", desc: "Acordar mais cedo e gastar até 1 hora separando mechas." },
-              { icon: Scissors, title: "Cabelo Queimado", desc: "Placas que não distribuem o calor e fritam as pontas." },
-              { icon: CheckCircle2, title: "Frizz Constante", desc: "Qualquer umidade faz o cabelo voltar a armar na hora." }
+              { icon: Sparkles, title: "Liso Profissional", desc: "Tenha resultado de salão em casa gastando 4x menos tempo." },
+              { icon: ShieldCheck, title: "Total Segurança", desc: "Pague somente quando o produto chegar na sua casa." },
+              { icon: Clock, title: "Fácil de Usar", desc: "Sistema intuitivo para alisar da raiz às pontas sem esforço." },
+              { icon: Heart, title: "Conforto Absoluto", desc: "Design ergonômico que protege suas mãos e couro cabeludo." },
+              { icon: BadgeCheck, title: "Alta Qualidade", desc: "Placas de cerâmica premium que não queimam os fios." }
             ].map((item, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                className="bg-[#F8F8F8] p-8 rounded-[2rem] border border-[#C2185B]/5 text-center shadow-sm"
+                className="bg-white p-10 rounded-[2.5rem] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.05)] border border-white flex flex-col items-center gap-6 group hover:border-[#C2185B]/20 transition-all"
               >
-                <div className="w-16 h-16 mx-auto bg-[#C2185B]/10 text-[#C2185B] rounded-2xl flex items-center justify-center mb-6">
-                  <item.icon className="w-8 h-8" />
+                <div className="w-20 h-20 bg-gradient-to-br from-[#E91E63] to-[#C2185B] text-white rounded-3xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
+                  <item.icon className="w-10 h-10" />
                 </div>
-                <h3 className="font-bold text-xl mb-3 text-[#1A1A1A]">{item.title}</h3>
-                <p className="text-[#666] leading-relaxed">{item.desc}</p>
+                <div className="space-y-2">
+                  <h3 className="font-black text-2xl tracking-tight">{item.title}</h3>
+                  <p className="text-[#666] leading-relaxed text-lg">{item.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SOLUTION / FEATURES */}
-      <section className="py-24 bg-[#F8F8F8]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}
-            className="text-center mb-20"
-          >
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-6 tracking-tight">
-              A Tecnologia por Trás da Perfeição
-            </h2>
-            <p className="text-lg text-[#666] max-w-2xl mx-auto leading-relaxed">
-              Desenvolvida para proteger enquanto transforma. A Lumi Liss é a evolução do alisamento capilar doméstico.
-            </p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-              <div className="relative">
-                <div className="absolute inset-0 bg-[#C2185B]/5 rounded-[2.5rem] transform rotate-3"></div>
-                <img 
-                  src={tempSettingsImg} 
-                  alt="5 níveis de temperatura" 
-                  className="relative z-10 rounded-[2rem] shadow-2xl w-full object-cover border-4 border-white"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-              className="space-y-10"
-            >
-              {[
-                { title: "25 Mini Placas de Cerâmica", desc: "Alisam uma mecha inteira de uma só vez, como se fossem 25 pranchas trabalhando juntas." },
-                { title: "5 Níveis de Temperatura", desc: "Ajuste ideal para todo tipo de cabelo, de 130ºC (cabelos finos) até 210ºC (cabelos grossos)." },
-                { title: "Tecnologia Íons Antifrizz", desc: "Sela as cutículas instantaneamente, garantindo brilho espelhado e maciez duradoura." }
-              ].map((item, i) => (
-                <motion.div key={i} variants={fadeInUp} className="flex gap-6">
-                  <div className="mt-1 shrink-0 w-10 h-10 rounded-xl bg-[#C2185B]/10 text-[#C2185B] flex items-center justify-center">
-                    <CheckCircle2 className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-xl text-[#1A1A1A] mb-2">{item.title}</h3>
-                    <p className="text-[#666] leading-relaxed">{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+      {/* 4. STRATEGIC TRUST SECTION */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-xl mx-auto">
+          <div className="bg-[#DCFCE7] border-2 border-[#25D366]/20 p-12 rounded-[3.5rem] text-center space-y-8 shadow-[0_40px_80px_-20px_rgba(37,211,102,0.15)] relative overflow-hidden">
+             <div className="absolute top-0 right-0 w-32 h-32 bg-[#25D366]/5 rounded-full -mr-16 -mt-16" />
+             <div className="w-24 h-24 bg-[#25D366] text-white rounded-full flex items-center justify-center mx-auto shadow-2xl relative z-10">
+                <Truck className="w-12 h-12" />
+             </div>
+             <div className="space-y-4 relative z-10">
+               <h3 className="text-3xl font-black text-[#1A1A1A] tracking-tighter">Frete Grátis + <br/>Pagamento na Entrega!</h3>
+               <p className="text-[#4A4A4A] font-bold text-lg leading-relaxed">
+                 Faça seu pedido agora e pague somente quando o entregador bater no seu portão. Risco ZERO total!
+               </p>
+             </div>
+             <button onClick={scrollToForm} className="bg-white text-[#15803d] font-black py-4 px-8 rounded-2xl shadow-md border border-[#25D366]/20 uppercase tracking-widest text-sm hover:bg-[#25D366] hover:text-white transition-all">
+               Fazer Pedido Seguro
+             </button>
           </div>
         </div>
       </section>
 
-      {/* TRANSFORMATION */}
-      <section className="py-24 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer}
-              className="order-2 lg:order-1"
-            >
-              <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-extrabold text-[#1A1A1A] mb-8 leading-tight tracking-tight">
-                Brilho Espelhado e Liso <span className="text-[#C2185B]">Natural.</span>
-              </motion.h2>
-              <motion.p variants={fadeInUp} className="text-lg text-[#666] mb-10 leading-relaxed">
-                Esqueça o efeito "esticado artificial" das pranchas tradicionais. A Lumi Liss proporciona movimento e um volume controlado que realça a beleza real do seu cabelo.
-              </motion.p>
-              <motion.button variants={fadeInUp} onClick={scrollToForm} className="px-10 py-5 rounded-2xl font-black text-xl bg-[#25D366] text-white shadow-lg hover:shadow-[#25D366]/30 transition-all flex items-center gap-3 uppercase">
-                RECEBER E PAGAR NA HORA
-                <Sparkles className="w-6 h-6" />
-              </motion.button>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              className="order-1 lg:order-2 relative"
-            >
-              <div className="absolute inset-0 bg-[#C2185B]/5 rounded-[3rem] transform rotate-2"></div>
-              <img 
-                src={transformationImg} 
-                alt="Antes e depois de usar a escova" 
-                className="relative z-10 rounded-[2.5rem] shadow-2xl border-4 border-white w-full"
-              />
-            </motion.div>
+      {/* 5. TESTIMONIALS */}
+      <section className="py-24 px-4 bg-[#F8F8F8]">
+        <div className="max-w-xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl font-black tracking-tight">O que elas dizem...</h2>
+            <p className="text-[#666] font-bold">Depoimentos reais de nossas clientes</p>
           </div>
-        </div>
-      </section>
-
-      {/* SOCIAL PROOF */}
-      <section className="py-24 bg-secondary/10">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-primary mb-16">
-            O que dizem as mulheres que já usam
-          </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-8">
             {[
-              { name: "Camila R.", age: 32, text: "Eu demorava 1h30 pra fazer chapinha. Hoje em 15 minutos tô pronta pro trabalho. O brilho que fica é surreal!" },
-              { name: "Juliana M.", age: 28, text: "O melhor é não pagar antes! Fiquei com medo de comprar na internet, mas eles entregaram certinho e paguei pro motoboy." },
-              { name: "Amanda T.", age: 45, text: "Meu cabelo é crespo e eu achava que não ia alisar. Meninas, alisa muito e não quebra as pontas como a prancha fazia." }
+              { name: "Juliana Costa", age: "32 anos", city: "São Paulo, SP", text: "Eu estava cansada de gastar horas no salão. A Lumi Liss salvou minha rotina! É muito prática e o liso fica perfeito.", result: "Resultado impecável na 1ª passada" },
+              { name: "Carla Mendes", age: "45 anos", city: "Curitiba, PR", text: "Tive receio de comprar, mas o pagamento na entrega me deu confiança. O entregador foi super educado e o produto é nota 10.", result: "Segurança total na compra" },
+              { name: "Ana Paula Silva", age: "28 anos", city: "Belo Horizonte, MG", text: "Meu cabelo é bem volumoso e a escova alisou tudo em minutos. O brilho que dá é incrível, parece que usei óleo reparador.", result: "Cabelo com brilho espelhado" }
             ].map((review, i) => (
               <motion.div 
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white p-8 rounded-2xl shadow-sm border border-border"
+                className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 space-y-6 relative"
               >
-                <div className="flex gap-1 text-gold mb-4 text-yellow-400">
-                  {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+                <div className="absolute top-10 right-10 opacity-[0.05]">
+                   <ThumbsUp className="w-16 h-16 text-[#C2185B]" />
                 </div>
-                <p className="italic text-muted-foreground mb-6">"{review.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary text-primary flex items-center justify-center font-bold font-display">
+                <div className="flex items-center gap-5">
+                  <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#E91E63] to-[#C2185B] text-white flex items-center justify-center font-black text-2xl shadow-inner">
                     {review.name[0]}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-primary">{review.name}</h4>
-                    <span className="text-xs text-muted-foreground">Compradora Verificada</span>
+                  <div className="text-left space-y-1">
+                    <h4 className="font-black text-xl tracking-tight">{review.name}</h4>
+                    <span className="text-xs font-black text-[#999] uppercase tracking-widest">{review.age} • {review.city}</span>
                   </div>
+                </div>
+                <div className="flex gap-1.5 text-yellow-400">
+                  {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+                </div>
+                <p className="text-[#4A4A4A] text-lg leading-relaxed italic">"{review.text}"</p>
+                <div className="bg-[#C2185B]/5 px-5 py-4 rounded-[1.5rem] border-l-[6px] border-[#C2185B] flex items-center gap-3">
+                  <Sparkles className="w-5 h-5 text-[#C2185B]" />
+                  <span className="text-sm font-black uppercase tracking-wide text-[#C2185B]">Resultado: {review.result}</span>
                 </div>
               </motion.div>
             ))}
@@ -296,192 +294,143 @@ export default function Home() {
         </div>
       </section>
 
-      {/* THE OFFER & ORDER FORM */}
-      <section id="pedido" className="py-24 bg-[#F8F8F8] relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-5 pointer-events-none"></div>
-        
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            
-            {/* Offer Copy */}
-            <div className="text-[#1A1A1A] space-y-8">
-              <div className="inline-block px-4 py-2 bg-[#C2185B] text-white font-black text-xs tracking-[0.2em] rounded-lg">
-                OFERTA EXCLUSIVA DE LANÇAMENTO
-              </div>
-              <h2 className="text-4xl md:text-7xl font-extrabold leading-[1.1] tracking-tight text-[#1A1A1A]">
-                Sua Melhor Versão, <span className="text-[#C2185B]">Sem Gastar com Salão.</span>
-              </h2>
-              
-              <div className="bg-[#DCFCE7] border border-[#25D366]/20 p-8 rounded-3xl shadow-xl">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-[#666] line-through text-xl">R$ 249,90</span>
-                  <span className="bg-[#C2185B] text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">48% OFF</span>
-                </div>
-                <div className="text-6xl md:text-7xl font-black text-[#1A1A1A] mb-6">
-                  R$ 129,90
-                </div>
-                <ul className="space-y-4">
-                  <li className="flex items-center gap-4 text-lg font-medium text-[#4A4A4A]">
-                    <div className="w-6 h-6 rounded-full bg-[#25D366]/20 flex items-center justify-center">
-                      <CheckCircle2 className="w-4 h-4 text-[#25D366]" />
-                    </div>
-                    <span>Frete Grátis para todo o Brasil</span>
-                  </li>
-                  <li className="flex items-center gap-4 text-xl font-black text-[#25D366] animate-pulse">
-                    <Truck className="w-7 h-7" />
-                    PAGUE APENAS NO ATO DA ENTREGA
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-[#25D366]/20 shadow-sm">
-                <ShieldCheck className="w-12 h-12 text-[#25D366] shrink-0" />
-                <p className="text-[#4A4A4A] text-sm leading-relaxed">
-                  <strong className="text-[#1A1A1A]">Segurança Garantida:</strong> Você faz o pedido agora e só paga ao entregador quando estiver com o produto em mãos. Risco zero para você.
-                </p>
-              </div>
+      {/* 6. FINAL CTA & ORDER FORM */}
+      <section id="pedido" className="py-24 px-4 bg-gradient-to-b from-[#E91E63] to-[#C2185B] text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
+        <div className="max-w-xl mx-auto space-y-16 relative z-10">
+          <div className="text-center space-y-8">
+            <div className="bg-white/20 inline-flex items-center gap-3 px-6 py-2 rounded-full text-sm font-black uppercase tracking-[0.2em] backdrop-blur-md">
+               <RotateCcw className="w-4 h-4 animate-spin-slow" />
+               Oferta Expirando
             </div>
+            <h2 className="text-[2.5rem] font-black leading-[1.1] tracking-tighter">Não Perca Esta Oportunidade Única!</h2>
+            <p className="text-white/90 font-bold text-xl leading-relaxed">Garanta seu desconto de 48% antes que o estoque acabe. <br/><span className="text-white">Pague apenas no ato da entrega!</span></p>
+          </div>
 
-            {/* Form Box */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }} 
-              whileInView={{ opacity: 1, scale: 1 }} 
-              viewport={{ once: true }}
-              className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1)] border border-[#C2185B]/5"
-            >
-              {isOrderComplete ? (
-                <div className="text-center py-12 space-y-6">
-                  <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-12 h-12" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-primary">Pedido Confirmado!</h3>
-                  <p className="text-lg text-muted-foreground">
-                    Sua Lumi Liss foi reservada com sucesso. Em breve, nossa equipe entrará em contato pelo WhatsApp para confirmar os detalhes da entrega.
-                  </p>
-                  <p className="font-bold text-primary mt-8">
-                    Lembre-se: Você só paga no ato da entrega!
-                  </p>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="bg-white p-10 md:p-14 rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] text-[#1A1A1A] border-4 border-[#C2185B]/10"
+          >
+            {isOrderComplete ? (
+              <div className="text-center py-12 space-y-8">
+                <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                  <CheckCircle2 className="w-12 h-12" />
                 </div>
-              ) : (
-                <>
-                  <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold text-primary mb-2">Reserve a Sua Agora</h3>
-                    <p className="text-muted-foreground text-sm">Pague R$ 129,90 somente ao receber em casa.</p>
-                  </div>
-
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                    <div>
-                      <label className="block text-sm font-medium text-primary mb-1">Nome Completo</label>
-                      <input 
-                        {...form.register("name")}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                        placeholder="Maria Silva"
-                      />
-                      {form.formState.errors.name && <p className="text-red-500 text-sm mt-1">{form.formState.errors.name.message}</p>}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-primary mb-1">WhatsApp (com DDD)</label>
-                      <input 
-                        {...form.register("phone")}
-                        type="tel"
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                        placeholder="(11) 99999-9999"
-                      />
-                      {form.formState.errors.phone && <p className="text-red-500 text-sm mt-1">{form.formState.errors.phone.message}</p>}
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-primary mb-1">CEP</label>
-                        <input 
-                          {...form.register("zipCode")}
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                          placeholder="00000-000"
-                        />
-                        {form.formState.errors.zipCode && <p className="text-red-500 text-sm mt-1">{form.formState.errors.zipCode.message}</p>}
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-primary mb-1">Estado</label>
-                        <input 
-                          {...form.register("state")}
-                          maxLength={2}
-                          className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all uppercase"
-                          placeholder="SP"
-                        />
-                        {form.formState.errors.state && <p className="text-red-500 text-sm mt-1">{form.formState.errors.state.message}</p>}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-primary mb-1">Cidade</label>
-                      <input 
-                        {...form.register("city")}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                        placeholder="São Paulo"
-                      />
-                      {form.formState.errors.city && <p className="text-red-500 text-sm mt-1">{form.formState.errors.city.message}</p>}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-primary mb-1">Endereço Completo (Rua, Número, Bairro)</label>
-                      <input 
-                        {...form.register("address")}
-                        className="w-full px-4 py-3 rounded-xl bg-background border border-border focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                        placeholder="Rua das Flores, 123 - Centro"
-                      />
-                      {form.formState.errors.address && <p className="text-red-500 text-sm mt-1">{form.formState.errors.address.message}</p>}
-                    </div>
-
-                    <div className="pt-4">
-                      <button 
-                        type="submit" 
-                        disabled={createOrder.isPending}
-                        className="w-full py-4 rounded-xl font-bold text-lg bg-green-600 text-white shadow-lg hover:bg-green-700 hover:shadow-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                      >
-                        {createOrder.isPending ? "Processando..." : "Concluir Reserva (Pagar na Entrega)"}
-                      </button>
-                      <p className="text-center text-xs text-muted-foreground mt-4 flex items-center justify-center gap-1">
-                        <ShieldCheck className="w-4 h-4" /> Seus dados estão 100% seguros
-                      </p>
-                    </div>
-                  </form>
-                </>
-              )}
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-24 bg-background">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-primary mb-12">Dúvidas Frequentes</h2>
-          <div className="space-y-6">
-            {[
-              { q: "Como funciona o pagamento na entrega?", a: "Você não paga nada agora. Após preencher o formulário, enviamos o produto. Quando o entregador chegar na sua casa com a encomenda, você efetua o pagamento diretamente a ele via PIX, Cartão ou Dinheiro." },
-              { q: "Funciona em cabelo crespo?", a: "Sim! A Lumi Liss foi desenvolvida para alisar desde cabelos finos e ondulados até os mais crespos, graças aos seus 5 níveis de temperatura." },
-              { q: "Qual o prazo de entrega?", a: "O prazo médio é de 3 a 7 dias úteis dependendo da sua região." },
-            ].map((faq, i) => (
-              <div key={i} className="bg-white p-6 rounded-2xl border border-border shadow-sm">
-                <h4 className="font-bold text-primary text-lg mb-2">{faq.q}</h4>
-                <p className="text-muted-foreground">{faq.a}</p>
+                <div className="space-y-4">
+                  <h3 className="text-3xl font-black tracking-tight uppercase">Pedido Reservado!</h3>
+                  <p className="text-[#666] text-lg font-medium">Nossa equipe entrará em contato pelo WhatsApp em instantes para confirmar seu endereço.</p>
+                </div>
+                <div className="bg-[#F8F8F8] p-6 rounded-3xl font-black text-[#C2185B] uppercase tracking-widest text-sm">
+                  Lembre-se: Você só paga ao receber!
+                </div>
               </div>
-            ))}
+            ) : (
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                <div className="text-center space-y-2 mb-10">
+                  <h3 className="text-2xl font-black tracking-tight">Dados de Entrega</h3>
+                  <div className="h-1.5 w-12 bg-[#C2185B] mx-auto rounded-full" />
+                </div>
+                
+                <div className="space-y-1">
+                  <input {...form.register("name")} placeholder="Nome Completo" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
+                  {form.formState.errors.name && <p className="text-red-500 text-[11px] font-black uppercase tracking-wider px-4 mt-1">{form.formState.errors.name.message}</p>}
+                </div>
+                
+                <div className="space-y-1">
+                  <input {...form.register("phone")} placeholder="WhatsApp (DDD)" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
+                  {form.formState.errors.phone && <p className="text-red-500 text-[11px] font-black uppercase tracking-wider px-4 mt-1">{form.formState.errors.phone.message}</p>}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <input {...form.register("zipCode")} placeholder="CEP" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
+                  <input {...form.register("state")} placeholder="UF" maxLength={2} className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg uppercase placeholder:text-gray-400" />
+                </div>
+
+                <input {...form.register("city")} placeholder="Cidade" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
+                <input {...form.register("address")} placeholder="Endereço Completo (Rua, Nº, Bairro)" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
+
+                <button type="submit" disabled={createOrder.isPending} className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_20px_40px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_25px_50px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-[0.1em] mt-6 flex items-center justify-center gap-3">
+                  {createOrder.isPending ? "Processando..." : "Pedir Agora - Pagar no Ato"}
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+                
+                <div className="flex flex-col items-center gap-2 pt-6 opacity-60">
+                   <div className="flex items-center gap-4">
+                      <Shield className="w-5 h-5" />
+                      <Truck className="w-5 h-5" />
+                      <BadgeCheck className="w-5 h-5" />
+                   </div>
+                   <span className="text-[10px] font-black uppercase tracking-widest">Processamento 100% Seguro & Sigiloso</span>
+                </div>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 7. FAQ */}
+      <section className="py-24 px-4 bg-white">
+        <div className="max-w-xl mx-auto space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-4xl font-black tracking-tight">Dúvidas Frequentes</h2>
+            <div className="h-1.5 w-12 bg-[#C2185B] mx-auto rounded-full" />
+          </div>
+          <div className="space-y-2">
+            <FAQItem question="Qual o material da escova?" answer="A Lumi Liss possui cerdas com revestimento cerâmico de alta qualidade que protegem os fios do calor direto, garantindo alisamento sem danos." />
+            <FAQItem question="Como funciona o pagamento na entrega?" answer="É simples: você preenche o pedido agora e não paga nada. Nós enviamos o produto e você paga diretamente ao entregador quando ele chegar na sua casa (via Pix, Cartão ou Dinheiro)." />
+            <FAQItem question="A escova serve para qualquer tipo de cabelo?" answer="Sim! Com 5 níveis de temperatura e 25 placas de cerâmica, ela alisa desde cabelos finos e ondulados até os mais crespos e resistentes." />
+            <FAQItem question="Qual o prazo de entrega?" answer="Nosso prazo médio é de 3 a 7 dias úteis. Após o pedido, enviamos o código de rastreio para o seu WhatsApp." />
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-primary py-8 border-t border-white/10 text-center">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl font-display text-white font-bold mb-4">Lumi Liss</h2>
-          <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} Lumi Liss Brasil. Todos os direitos reservados.<br/>
-            Este site não é afiliado ao Facebook ou qualquer entidade do Facebook.
-          </p>
+      {/* 8. WHATSAPP SUPPORT SECTION */}
+      <section className="py-24 px-4 bg-[#F8F8F8] border-t border-gray-100">
+        <div className="max-w-xl mx-auto text-center space-y-10">
+           <h2 className="text-3xl font-black tracking-tight text-[#1A1A1A]">Ainda tem alguma dúvida?</h2>
+           <p className="text-[#666] font-bold text-lg leading-relaxed">Nossa equipe de especialistas está pronta para te ajudar agora mesmo pelo WhatsApp.</p>
+           <a 
+             href="https://wa.me/5500000000000" 
+             className="inline-flex items-center gap-4 bg-[#25D366] text-white font-black py-6 px-10 rounded-full text-xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all uppercase tracking-wider"
+           >
+             <MessageCircle className="w-8 h-8" />
+             Falar com Atendente
+           </a>
         </div>
+      </section>
+
+      {/* 9. FOOTER */}
+      <footer className="py-16 px-4 bg-[#1A1A1A] text-white text-center space-y-10">
+         <div className="flex items-center justify-center gap-3 font-black text-2xl tracking-tighter">
+            <Heart className="w-8 h-8 text-[#C2185B] fill-current" />
+            <span className="uppercase tracking-[0.1em]">Lumi Liss BRASIL</span>
+         </div>
+         <div className="space-y-6">
+           <p className="text-white/40 text-[11px] font-bold leading-relaxed max-w-xs mx-auto uppercase tracking-widest">
+             Transformando vidas através da confiança e bem-estar.
+           </p>
+           <nav className="flex justify-center gap-8 text-[11px] font-black uppercase tracking-widest text-white/60">
+              <a href="#" className="hover:text-[#C2185B]">Política de Privacidade</a>
+              <a href="#" className="hover:text-[#C2185B]">Termos de Uso</a>
+           </nav>
+         </div>
+         <div className="text-[10px] text-white/20 font-black uppercase tracking-[0.3em] pt-8">
+            © {new Date().getFullYear()} Lumi Liss Brasil
+         </div>
       </footer>
+
+      {/* FLOATING WHATSAPP BUTTON */}
+      <a 
+        href="https://wa.me/5500000000000" 
+        target="_blank" 
+        rel="noreferrer"
+        className="fixed bottom-8 right-8 w-20 h-20 bg-[#25D366] text-white rounded-full shadow-[0_20px_50px_rgba(37,211,102,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-[100] group"
+      >
+        <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-20 group-hover:hidden" />
+        <svg viewBox="0 0 24 24" className="w-12 h-12 fill-current relative z-10">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+      </a>
     </div>
   );
 }
