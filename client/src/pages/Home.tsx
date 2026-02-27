@@ -294,7 +294,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. FINAL CTA & ORDER FORM */}
+      {/* 6. FINAL CTA & OFFER */}
       <section id="pedido" className="py-24 px-4 bg-gradient-to-b from-[#E91E63] to-[#C2185B] text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10" />
         <div className="max-w-xl mx-auto space-y-16 relative z-10">
@@ -311,59 +311,58 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="bg-white p-10 md:p-14 rounded-[3.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] text-[#1A1A1A] border-4 border-[#C2185B]/10"
           >
-            {isOrderComplete ? (
-              <div className="text-center py-12 space-y-8">
-                <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                  <CheckCircle2 className="w-12 h-12" />
+            <div className="space-y-8">
+              <div className="space-y-2 text-center">
+                <h3 className="text-2xl font-black tracking-tight uppercase">1 Lumi Liss</h3>
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-[#999] line-through text-xl font-bold">R$ 249,90</span>
+                  <span className="bg-[#C2185B] text-white text-[11px] font-black px-3 py-1 rounded-full uppercase tracking-wider">48% OFF</span>
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-3xl font-black tracking-tight uppercase">Pedido Reservado!</h3>
-                  <p className="text-[#666] text-lg font-medium">Nossa equipe entrará em contato pelo WhatsApp em instantes para confirmar seu endereço.</p>
-                </div>
-                <div className="bg-[#F8F8F8] p-6 rounded-3xl font-black text-[#C2185B] uppercase tracking-widest text-sm">
-                  Lembre-se: Você só paga ao receber!
+                <div className="text-6xl font-black text-[#1A1A1A] tracking-tighter">R$ 129,90</div>
+              </div>
+
+              <div className="flex justify-center">
+                <div className="bg-[#DCFCE7]/60 border border-[#25D366]/20 inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl text-[#15803d] font-black text-sm uppercase tracking-wide">
+                  <ShieldCheck className="w-5 h-5" />
+                  <span>Pagamento na Entrega</span>
                 </div>
               </div>
-            ) : (
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                <div className="text-center space-y-2 mb-10">
-                  <h3 className="text-2xl font-black tracking-tight">Dados de Entrega</h3>
-                  <div className="h-1.5 w-12 bg-[#C2185B] mx-auto rounded-full" />
-                </div>
-                
-                <div className="space-y-1">
-                  <input {...form.register("name")} placeholder="Nome Completo" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
-                  {form.formState.errors.name && <p className="text-red-500 text-[11px] font-black uppercase tracking-wider px-4 mt-1">{form.formState.errors.name.message}</p>}
-                </div>
-                
-                <div className="space-y-1">
-                  <input {...form.register("phone")} placeholder="WhatsApp (DDD)" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
-                  {form.formState.errors.phone && <p className="text-red-500 text-[11px] font-black uppercase tracking-wider px-4 mt-1">{form.formState.errors.phone.message}</p>}
-                </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <input {...form.register("zipCode")} placeholder="CEP" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
-                  <input {...form.register("state")} placeholder="UF" maxLength={2} className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg uppercase placeholder:text-gray-400" />
-                </div>
+              <ul className="text-left space-y-5 pt-4 max-w-[240px] mx-auto">
+                <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+                  <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span>Frete Grátis</span>
+                </li>
+                <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+                  <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span>Pagamento na Entrega</span>
+                </li>
+                <li className="flex items-center gap-4 font-black text-[15px] text-[#333]">
+                  <div className="w-6 h-6 rounded-full bg-[#C2185B] flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                  </div>
+                  <span>Receba em até 24 horas</span>
+                </li>
+              </ul>
 
-                <input {...form.register("city")} placeholder="Cidade" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
-                <input {...form.register("address")} placeholder="Endereço Completo (Rua, Nº, Bairro)" className="w-full px-6 py-5 rounded-[1.25rem] bg-[#F8F8F8] border-2 border-transparent focus:border-[#C2185B]/20 focus:bg-white focus:ring-0 transition-all font-bold text-lg placeholder:text-gray-400" />
-
-                <button type="submit" disabled={createOrder.isPending} className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_20px_40px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_25px_50px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-[0.1em] mt-6 flex items-center justify-center gap-3">
-                  {createOrder.isPending ? "Processando..." : "Pedir Agora - Pagar no Ato"}
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-                
-                <div className="flex flex-col items-center gap-2 pt-6 opacity-60">
-                   <div className="flex items-center gap-4">
-                      <Shield className="w-5 h-5" />
-                      <Truck className="w-5 h-5" />
-                      <BadgeCheck className="w-5 h-5" />
-                   </div>
-                   <span className="text-[10px] font-black uppercase tracking-widest">Processamento 100% Seguro & Sigiloso</span>
-                </div>
-              </form>
-            )}
+              <a 
+                href="https://wa.me/5500000000000"
+                className="w-full py-6 rounded-full bg-[#25D366] text-white font-black text-xl shadow-[0_15px_30px_-5px_rgba(37,211,102,0.4)] hover:shadow-[0_20px_40px_-5px_rgba(37,211,102,0.5)] hover:-translate-y-1 transition-all uppercase tracking-widest flex items-center justify-center gap-3"
+              >
+                Garantir Minha Oferta
+              </a>
+              
+              <div className="flex flex-col items-center gap-3 pt-2">
+                 <div className="flex gap-1 text-yellow-400">
+                    {[...Array(5)].map((_, j) => <Star key={j} className="w-5 h-5 fill-current" />)}
+                  </div>
+                  <span className="text-sm font-black text-[#C2185B] uppercase tracking-[0.2em] animate-pulse text-center">Últimas unidades em estoque</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
